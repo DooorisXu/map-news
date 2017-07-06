@@ -17,7 +17,7 @@
 // the coded needed there is in the speculation on the website 
 
 
-
+// define the global variables 
 // Google Map
 var map;
 
@@ -34,7 +34,7 @@ $(function() {
     // https://developers.google.com/maps/documentation/javascript/styling
     var styles = [
 
-        // hide Google's labels
+        // hide Google's labels--the cool stuff
         {
             featureType: "all",
             elementType: "labels",
@@ -56,6 +56,7 @@ $(function() {
 
     // options for map
     // https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+    //  not dynamic 
     var options = {
         center: {lat: 42.3770, lng:  -71.1256}, // Cambridge, Massachusetts
         disableDefaultUI: true,
@@ -66,9 +67,6 @@ $(function() {
         zoom: 13,
         zoomControl: true
     };
-    // input+pull down
-    // click on the result 
-    // change the amp
 
     // get DOM node in which map will be instantiated
     var canvas = $("#map-canvas").get(0);
@@ -92,33 +90,33 @@ function addMarker(place)
   var lng=place['longitude'];
   var myLatLng = {lat, lng};
     // call the city name
-  var city=place['place_name'] + ',' + place['admin_name1'];
+  var city=place['place_name'] + ',' + place['admin_code1'];
 
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
     label: city
   });
-//   console.log(marker);
-//   markers.push(marker);
-//   marker.setMap(map);
+  console.log(marker);
+  markers.push(marker);
+  marker.setMap(map);
 
 
     var url='/articles?geo='+place['postal_code'];
     google.maps.event.addListener(marker, "click", function() {
 
-    $.getJSON (url,function(data)
-    {
-        var show='<ul>';
-        for (var i = 0; i < data.length; i++)
-       {
-           //can diectly link a and li
-            //link and title are defined in helpers.py
-           show+=('<li><a href=' +data[i]['link'] + '>' + data[i]['title']+'</a></li>');
-       }
-       show+='</ul>';
-       showInfo(marker,show);
-    });
+        $.getJSON (url,function(data)
+        {
+            var show='<ul>';
+            for (var i = 0; i < data.length; i++)
+           {
+               //can diectly link a and li
+                //link and title are defined in helpers.py
+               show+=('<li><a href=' +data[i]['link'] + '>' + data[i]['title']+'</a></li>');
+           }
+           show+='</ul>';
+           showInfo(marker,show);
+        });
     });
 }
 

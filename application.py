@@ -47,7 +47,7 @@ def articles():
     # max 10 cities 
 def search():
     q = request.args.get("q") + "%"
-    rows=db.execute("SELECT * FROM places WHERE postal_code LIKE :q", q=q)
+    rows=db.execute("SELECT * FROM places WHERE postal_code LIKE :q OR place_name LIKE :q OR admin_name1 LIKE :q", q=q)
     return jsonify(rows)
     """Search for places that match query."""
 

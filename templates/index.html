@@ -4,31 +4,42 @@
     <head>
 
         <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
+        <!--set the character set, make sure the webpage is displayed correctly-->
         <meta charset="utf-8"/>
+        <!--enable the user to use the website on mobile device-->
         <meta content="initial-scale=1, width=device-width" name="viewport"/>
 
         <!-- http://getbootstrap.com/ -->
+        <!--get the stylesheet from bootstrap-->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 
         <!-- app's own CSS -->
         <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
 
         <!-- https://developers.google.com/maps/documentation/javascript/ -->
+        <!--import the google map documentation-->
+        <!--allows you to get the API key-->
         <script src="https://maps.googleapis.com/maps/api/js?key={{ key | urlencode }}&v=3.exp"></script>
 
         <!-- http://jquery.com/ -->
+       <!--imports jquery-->
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
         <!-- http://getbootstrap.com/ -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <!-- https://github.com/corejavascript/typeahead.js/blob/master/doc/jquery_typeahead.md -->
+        <!--imports other qualities of javascript-->
         <script src="https://cdn.rawgit.com/corejavascript/typeahead.js/master/dist/typeahead.jquery.js"></script>
 
         <!-- http://handlebarsjs.com/ -->
+        <!--handlerbars is a templating engine-->
+        <!--the text window, allows you to access the import-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
         <!-- http://stewartjpark.com/Flask-JSGlue/ -->
+        <!--Flask-JSGlue helps hook up your Flask application nicely with the front end.-->
+        <!--allows you to use the url_for when the routes are frequntly changed -->
         {{ JSGlue.include() }}
 
         <!-- app's own JavaScript -->
@@ -40,6 +51,7 @@
     <body>
 
         <!-- fill viewport -->
+        <!--Use .container-fluid for a full width container, spanning the entire width of your viewport.-->
         <div class="container-fluid">
 
             <!-- https://developers.google.com/maps/documentation/javascript/tutorial -->
@@ -48,8 +60,10 @@
             <!-- http://getbootstrap.com/css/#forms -->
             <form id="form">
                 <div class="form-group">
+                    <!--If your navigation contains many links and comes before the main content in the DOM, add a Skip to main content link before the navigation (for a simple explanation, see this A11Y Project article on skip navigation links). Using the .sr-only class will visually hide the skip link, and the .sr-only-focusable class will ensure that the link becomes visible once focused (for sighted keyboard users).-->
                     <label class="sr-only" for="q">City, State, Postal Code</label>
-                    <input class="form-control" id="q" placeholder="City, State, Postal Code" type="text"/>
+                    <!--input-->
+                    <input autocomplete="off" class="form-control" id="q" placeholder="City, State, Postal Code" type="text"/>
                 </div>
             </form>
         </div>
