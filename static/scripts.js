@@ -87,18 +87,21 @@ $(function() {
  */
 function addMarker(place)
 {
+// place is an array 
   var lat=place['latitude'];
   var lng=place['longitude'];
   var myLatLng = {lat, lng};
+    // call the city name
+  var city=place['place_name'] + ',' + place['admin_name1'];
 
   var marker = new google.maps.Marker({
     position: myLatLng,
     map: map,
-    title: 'Label!'
+    label: city
   });
-  console.log(marker);
-  markers.push(marker);
-  marker.setMap(map);
+//   console.log(marker);
+//   markers.push(marker);
+//   marker.setMap(map);
 
 
     var url='/articles?geo='+place['postal_code'];
@@ -110,6 +113,7 @@ function addMarker(place)
         for (var i = 0; i < data.length; i++)
        {
            //can diectly link a and li
+            //link and title are defined in helpers.py
            show+=('<li><a href=' +data[i]['link'] + '>' + data[i]['title']+'</a></li>');
        }
        show+='</ul>';
@@ -159,6 +163,8 @@ function configure()
 
     // re-center map after place is selected from drop-down
     $("#q").on("typeahead:selected", function(eventObject, suggestion, name) {
+
+       
 
         // set map's center
         map.setCenter({lat: parseFloat(suggestion.latitude), lng: parseFloat(suggestion.longitude)});
